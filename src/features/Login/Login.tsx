@@ -45,7 +45,6 @@ export const Login = () => {
             return errors;
         },
         onSubmit: values => {
-            // alert(JSON.stringify(values));
             dispatch(loginTC(values))
             formik.resetForm();
         },
@@ -62,7 +61,8 @@ export const Login = () => {
                 <FormLabel>
                     <p>To log in get registered
                         <a href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'}> here
+                           target={'_blank'}
+                           rel="noreferrer"> here
                         </a>
                     </p>
                     <p>or use common test account credentials:</p>
@@ -84,10 +84,6 @@ export const Login = () => {
                         <TextField type="password"
                                    label="Password"
                                    margin="normal"
-                            // name={'password'}
-                            // onChange={formik.handleChange}
-                            // value={formik.values.password}
-                            // onBlur={formik.handleBlur}
                                    {...formik.getFieldProps('password')}
                         />
                         {formik.touched.password && formik.errors.password ? <div
