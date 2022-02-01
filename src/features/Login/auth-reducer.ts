@@ -6,15 +6,23 @@ import {
 } from '../../app/app-reducer'
 import {authAPI, LoginParamsType} from "../../api/todolists-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
+import {createSlice} from "@reduxjs/toolkit";
+
+enum AUTH_ACTIONS {
+    SET_IS_LOGGED_IN = 'auth/SET-IS-LOGGED-IN',
+}
 
 const initialState = {
     isLoggedIn: false
 }
-type InitialStateType = typeof initialState
+
+// const slice = createSlice({
+//     name
+// })
 
 export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case 'login/SET-IS-LOGGED-IN':
+        case AUTH_ACTIONS.SET_IS_LOGGED_IN:
             return {...state, isLoggedIn: action.value}
         default:
             return state
@@ -22,7 +30,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 }
 // actions
 export const setIsLoggedInAC = (value: boolean) =>
-    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+    ({type: AUTH_ACTIONS.SET_IS_LOGGED_IN, value} as const)
 
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
@@ -57,7 +65,10 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
 
 
 // types
+type InitialStateType = typeof initialState
+
 type ActionsType =
     ReturnType<typeof setIsLoggedInAC>
     | SetAppStatusActionType
     | SetAppErrorActionType
+
