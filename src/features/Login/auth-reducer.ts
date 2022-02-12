@@ -30,6 +30,9 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
                 dispatch(setIsLoggedInAC({value: true}))
                 dispatch(setAppStatusAC({status: 'succeeded'}))
             }
+            if (res.data.resultCode === 1) {
+                handleServerAppError(res.data, dispatch)
+            }
         })
         .catch((error) => {
             handleServerNetworkError(error, dispatch)
